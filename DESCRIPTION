@@ -1,10 +1,12 @@
 Package: aermod
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: R interface to the AERMOD dispersion model
+Version: 0.1
 Date: 2011-06-03
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Depends: lubridate
+Author: David Holstius
+Maintainer: David Holstius <david.holstius@berkeley.edu>
+Description: Reads data from formats used by AERMOD
+License: BSD
 LazyLoad: yes
+Collate: 'aermod.R' 'read.unformatted.R'

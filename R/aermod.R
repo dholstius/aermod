@@ -1,4 +1,4 @@
-#' Reads data from formats used by AERMOD.
+#' Interface to the AERMOD dispersion model
 #'
 #' \tabular{ll}{
 #' Package: \tab aermod\cr
@@ -12,10 +12,10 @@
 #' @name aermod-package
 #' @aliases aermod
 #' @docType package
-#' @title Reads data from formats used by AERMOD.
+#' @title Reads data from formats used by AERMOD
 #' @author David Holstius
 #' @references
 #' \url{http://www.epa.gov/ttn/scram/dispersion_prefrec.htm#aermod}
 #' @keywords package
-#' @seealso \code{\link{read.AERMOD.unformatted}}
+#' @seealso \code{\link{read.unformatted}}
 NULL
