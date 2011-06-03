@@ -9,4 +9,4 @@ Maintainer: David Holstius <david.holstius@berkeley.edu>
 Description: Reads data from formats used by AERMOD
 License: BSD
 LazyLoad: yes
-Collate: 'aermod.R' 'read.unformatted.R'
+Collate: 'aermod.R' 'as.degrees.R' 'as.radians.R' 'grid.polar.R' 'read.unformatted.R'

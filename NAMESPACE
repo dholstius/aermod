@@ -1,1 +1,4 @@
+export(as.degrees)
+export(as.radians)
+export(grid.polar)
 export(read.unformatted)
