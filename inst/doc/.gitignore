@@ -1,1 +1,7 @@
-*.aux *.log *.eps *.tex *.dvi
+*.aux
+*.log
+*.eps
+*.tex
+*.dvi
+*-*.pdf
+Rplots.pdf
