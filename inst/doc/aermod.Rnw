@@ -1,0 +1,110 @@
+% \VignetteIndexEntry{aermod: an R interface to AERMOD} 
+% \VignetteDepends{sp, ggplot2}
+% \VignetteKeyword{AERMOD}
+
+\documentclass[a4paper]{article}
+
+\title{aermod: an R interface to AERMOD}
+\author{David Holstius}
+\bibliographystyle{plain}
+
+\begin{document}
+
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=1em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=1em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=1em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+
+\setkeys{Gin}{width=0.95\textwidth}
+
+<<echo=false>>=
+options(width=60, continue=" ")
+options(SweaveHooks=list(fig=function() par(mar=c(5.1, 4.1, 1.1, 2.1))))
+@
+
+\maketitle
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\Rvar}[1]{\texttt{#1}}
+\newcommand{\Rfunc}[1]{\texttt{#1}}
+\newcommand{\Rpkg}[1]{\texttt{#1}}
+
+<<echo=FALSE>>= 
+options(
+	width=60, 
+	continue=" ", 
+	SweaveHooks=list(fig=function() par(mar=c(5.1, 4.1, 1.1, 2.1)))
+	)
+@
+
+\SweaveOpts{width=6,height=4}
+
+\section{Working with AERMOD output}
+
+\subsection{Importing binary files}
+
+With the aermod package, we can read ``unformatted'' (binary) output created by AERMOD. A sample file is included. It corresponds to the output of ``aertest.inp'' scenario packaged with the AERMOD source code.
+
+<<read_unformatted>>=
+# 1-hour averages from the "aertest" case
+library(aermod)
+filename <- system.file('extdata','AERMOD','output','aertest-1h.bin',package='aermod')
+records <- read.unformatted(filename, n.receptors=144)
+length(records)
+@
+
+This file contains 1-hour averages computed over four days, so there are \Sexpr{length(records)} records in total. Each record looks like this:
+
+<<show_record>>=
+options(max.print=12, digits=2)
+records[[1]]
+@
+
+We can repackage the concentrations as a matrix with just a few lines of code:
+
+<<as_matrix>>=
+conc.list <- lapply(records, function(x) x$concentrations)
+conc.mat <- do.call(cbind, conc.list)
+conc.mat[,1:4]
+dim(conc.mat)
+@
+
+Here there are \Sexpr{nrow(conc.mat)} rows, one for each receptor; and \Sexpr{ncol(conc.mat)} columns, one for each averaging period. Above, we show only the first few columns.
+
+\subsection{Plotting receptor concentrations}
+
+We can compute and plot summary statistics quite easily. First we compute summary statistics for the data, including running averages:
+
+<<summary_stats>>=
+avg <- function(x, n) filter(x, rep(1 / n, n), sides=1)
+max.8 <- function(x) max(avg(x, 8), na.rm=TRUE)
+max.24 <- function(x) max(avg(x, 24), na.rm=TRUE)
+COL <- 1
+results <- data.frame(
+	mean = apply(conc.mat, COL, mean),
+	max.1h = apply(conc.mat, COL, max),
+	max.8h = apply(conc.mat, COL, max.8),
+	max.24h = apply(conc.mat, COL, max.24),
+	sd = apply(conc.mat, COL, sd))
+quantile(results$mean, seq(0, 1, by=0.1))
+@
+
+Next we recreate the polar grid to which these receptors correspond.
+
+<<polar_grid>>=
+grd <- grid.polar(c(175,350,500,1000), 36, 10, 10)
+grd <- as.data.frame(grd)
+@
+
+Finally we bind them together and plot the results on a map:
+
+<<plot_mean,fig=TRUE,echo=TRUE>>=
+library(ggplot2)
+p <- ggplot(data.frame(grd, results), aes(x, y)) + coord_equal() 
+p.mean <- p + geom_point(aes(color=mean, size=mean, alpha=mean))
+print(p.mean)
+@
+
+<<plot_max_8h,fig=TRUE,echo=TRUE>>=
+p.max.8h <- p + geom_point(aes(color=max.8h, size=max.8h, alpha=max.8h))
+print(p.max.8h)
+@
+
+\end{document}
