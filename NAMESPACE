@@ -1,4 +1,6 @@
-export(as.degrees)
 export(as.radians)
 export(grid.polar)
 export(read.unformatted)
+export(units<-.numeric)
+export(units.numeric)
+export(units<-.quantity)
