@@ -1,0 +1,34 @@
+This folder contains the evaluation databases for the AERMOD dispersion model (dated 02222).
+Each subfolder contains the raw inputs and outputs for AERMET, AERMAP (if applicable), BPIP 
+(if applicable) and AERMOD.  A separate subfolder containing the observed concentration data 
+is provided.  Subfolders are also provided for other models included in the evaluation.  
+A total of 17 databases were used in the evaluation of AERMOD.  The databases and their 
+role within the AERMOD performance evaluation are identified below:
+
+	AGA		Flat, Rural, Downwash, Independent
+	Alaska		Flat, Rural, Downwash, Developmental
+	Baldwin		Flat, Rural, Non-downwash, Independent
+	Bowline		Flat, Rural, Downwash, Developmental/Independent*
+	Clify Creek	Flat, Rural, Non-downwash, Independent
+	DAEC		Flat**, Rural, Downwash, Developmental
+	EOCR		Flat, Rural, Downwash, Independent
+	Indianapolis	Flat, Urban, Non-downwash, Developmental
+	Kincaid SF6	Flat, Rural, Non-downwash, Developmental
+	Kincaid SO2	Flat, Rural, Non-downwawh, Developmental
+	Lee Wind Tunnel	Flat, Rural, Downwash, Independent
+	Lovett		Terrain, Rural, Non-downwash, Developmental
+	Martin's Creek	Terrain, Rural, Non-downwash***, Independent
+	Millstone	Flat, Rural, Downwash, Developmental
+	Prairie Grass	Flat, Rural, Non-downwash, Developmental
+	Tracy		Terrain, Rural, Non-downwash, Independent
+	Westvaco	Terrain, Rural, Non-downwash, Independent
+
+*	Half of the days for Bowline were randomly selected for use as a developmental 
+	database for PRIME, and the full year was used as an independent database.
+
+**	The DAEC database included some elevated terrain, which was included in the 
+	final evaluation results.
+
+***	Martin's Creek included some limited downwash effect due to nearby cooling towers,
+	which was included in the final evaluation results.
+	
