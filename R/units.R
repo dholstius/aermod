@@ -1,39 +1,15 @@
-#'
-#' Set the "units" attribute of a vector. Implicitly promotes the vector to a quantity.
-#'
-#' @param x numeric vector
-#' @param value character string 
-#' @return vector of class "quantity" with attribute "units" set to value
-#' @export
-#'
-'units<-.numeric' <- function(x, value) {
+units.numeric <- function(x) {
+	attr(x, "units")
+}
+
+`units<-.numeric` <- function(x, value) {
 	stopifnot(inherits(value, "character"))
 	attr(x, "units") <- value
 	class(x) <- 'quantity'
 	return(x)
 }
 
-#'
-#' Query the "units" attribute of a vector.
-#'
-#' @param x vector
-#' @return character string
-#' @export
-#'
-units.numeric <- function(x) {
-	attr(x, "units")
-}
-
-
-#'
-#' Set the "units" attribute of a quantity.
-#'
-#' @param x numeric vector
-#' @param value character string 
-#' @return vector of class "quantity" with attribute "units" set to value
-#' @export
-#'
-'units<-.quantity' <- function(x, value) {
+`units<-.quantity` <- function(x, value) {
 	stopifnot(inherits(value, "character"))
 	if(units(x) != value) {
 		if(units(x) == "degrees" && value == "radians") {

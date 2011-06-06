@@ -1,4 +1,6 @@
 \name{aermod-package}
+\alias{aermod-package}
+\alias{aermod-package}
 \title{Reads data from formats used by AERMOD}
 \description{Interface to the AERMOD dispersion model}
 \details{\tabular{ll}{
@@ -15,3 +17,4 @@ LazyLoad: \tab yes\cr
 \references{\url{http://www.epa.gov/ttn/scram/dispersion_prefrec.htm#aermod}}
 \keyword{package}
 \seealso{\code{\link{read.unformatted}}}
+
