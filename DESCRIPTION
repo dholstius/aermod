@@ -3,10 +3,11 @@ Type: Package
 Title: R interface to the AERMOD dispersion model
 Version: 0.1
 Date: 2011-06-03
-Depends: lubridate
+Depends: sp, lubridate
+Suggests: ggplot2
 Author: David Holstius
 Maintainer: David Holstius <david.holstius@berkeley.edu>
 Description: Reads data from formats used by AERMOD
 License: BSD
 LazyLoad: yes
-Collate: 'aermod.R' 'as.degrees.R' 'as.radians.R' 'grid.polar.R' 'read.unformatted.R'
+Collate: 'aermod.R' 'grid.polar.R' 'read.obs.R' 'read.unformatted.R' 'units.R' 'ymdh.R'
